@@ -1,0 +1,523 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
+*{
+    font-family: 'Poppins';
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+}
+
+*::-webkit-scrollbar{
+    height: .5rem;
+    width: 1rem;
+}
+ 
+*::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+ 
+*::-webkit-scrollbar-thumb{
+    background-color: B0B0B0;
+}
+ 
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background-color: #FFFDF8;
+}
+ 
+body{
+    overflow: hidden;
+    transition: .2s linear !important;
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    /* background: linear-gradient(to bottom, #76abfa, #3c79dc, #28549a); */
+    background-color: #FFFDF8;
+}
+
+.container{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 150px 1fr;
+}
+
+.sidebar {
+    width: 150px;
+    height: 100vh;
+    /* background-color: #95B8F3; */
+    background-color: #70A5FF;
+    text-align: center; 
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+.logo img{
+    width: 100px;
+    height: 100px;
+    margin-top: 2rem;
+}
+.sidebar h1 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-top: -1rem;
+    color: #fff;
+}
+
+.sidebar .menu a{
+    display: block;
+    font-size: 1.5rem;
+    color: #fff;
+    padding: 2rem;
+    margin: 0 2rem 2rem 2rem;
+    font-size: 4rem;
+}
+
+.menu a:hover{
+    background-color: #4285F4;
+    border-radius: 5px;
+}
+
+.menu a.active{
+    background-color: #256ade;
+    border-radius: 5px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5rem 0rem 5rem;
+}
+
+.header h1{
+    font-size: 52px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    /* color: #fff; */
+    color: #005fff;
+}
+
+.header .btn {
+    /* background-color: #95B8F3; */
+    
+    /* background-color: #005fff; */
+    background-color: #4389ff;
+    color: #fff;
+    padding: 1rem 2rem;
+    margin-right: 1rem;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.header .btn:hover{
+    background-color: #256ade;
+}
+
+.header .btn i{
+    margin-right: 1rem;
+}
+
+hr{
+    width: 95%;
+    border: 1px solid #95B8F3;
+}
+
+.btn-content{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0rem 5rem;
+}
+
+.btn-content .btn{
+    background-color: #70A5FF;
+    color: #fff;
+    padding: 1rem 2rem;
+    margin-right: 1rem;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.btn-content .active, .btn-content .btn:hover{
+    /* background-color: #0354d5; */
+    box-shadow: #042153;
+    background-color: #256ade;
+}
+
+.card-task{
+    display: block;
+    margin: 1rem 5rem 0 5rem;
+    border-radius: 5px;
+}
+.task {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+}
+
+.card-task.late{
+    background-color: #FF7F50;
+}
+
+.card-task.in-progress{
+    background-color: #95B8F3;
+}
+
+.card-task.done{
+    background-color: lightgreen;
+}
+
+.head-task{
+    display: flex;
+}
+
+.head-task i{
+    font-size: 2.5rem;
+    color: #fff;
+    margin: auto 2rem ;
+}
+
+
+
+.head-task input[type="checkbox"]{
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 2rem;
+}
+
+.task.late.head-task input[type="checkbox"]{
+    background-color: #FF7F50;
+}
+
+.task.in-progress.head-task input[type="checkbox"]{
+    background-color: #95B8F3;
+}
+
+.task.done.head-task input[type="checkbox"]{
+    background-color: lightgreen;
+}
+
+.head-task input[type="checkbox"]:after{
+    font-family: "Font Awesome 5 Free";
+    content: "\f00c";
+    font-weight: 900;
+    font-size: 25px;
+    color: #fff;
+    display: none;
+}
+
+
+.task.late.head-task input[type="checkbox"]:hover,.task.late.head-task input[type="checkbox"]:checked{
+    background-color: #fb6b36;
+}
+
+.task.in-progress.head-task input[type="checkbox"]:hover,.task.in-progress.head-task input[type="checkbox"]:checked{
+    background-color: #4285F4;
+}
+
+.task.done.head-task input[type="checkbox"]:hover,.task.done.head-task input[type="checkbox"]:checked{
+    background-color: #66f066;
+}
+
+.head-task input[type="checkbox"]:checked:after{
+    display: block;
+}
+
+.head-task h2{
+    font-size: 24px;
+    color: #fff;
+    margin: auto 0;
+    cursor: pointer;
+}
+
+.tail-task{
+    display: flex;
+}
+
+.tail-task .duedate{
+    display: flex;
+    align-items: center;
+    margin: auto 2rem;
+}
+
+.btn-edit:hover{
+    background-color: #4285F4;
+    border-radius: 5px;
+}
+
+.duedate i{
+    font-size: 2.5rem;
+    color: #fff;
+    margin: auto 1rem ;
+}
+
+.duedate p{
+    font-size: 24px;
+    font-weight: regular;
+    color: #fff;
+    margin: auto 0;
+}
+
+.tail-task .btn-edit{
+    display: inline-flex;
+    align-items: center;
+    margin: auto 2rem;
+    cursor: pointer;
+}
+
+.btn-edit i{
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.btn-edit p{
+    font-size: 24px;
+    font-weight: regular;
+    color: #fff;
+    margin: auto 0;
+    text-decoration: underline;
+}
+
+.showdetail{
+    display: none;
+    height: 70px;
+    border-radius: 0 0 5px 5px;
+    transition: .2s linear;
+}
+
+.showdetail.late{
+    background-color: #ffaa8c;
+    border-radius: 0 0 5px 5px;
+}
+
+.showdetail.in-progress{
+    background-color: #c2d2ee;
+    border-radius: 0 0 5px 5px;
+}
+
+.showdetail.done{
+    background-color: #c8f8c8;
+    border-radius: 0 0 5px 5px;
+}
+
+.showdetail h3{
+    font-size: 14px;
+    font-weight: regular;
+    color: black;
+    margin: auto 1rem;
+}
+
+.showdetail p{
+    font-size: 14px;
+    font-weight: regular;
+    color: black;
+    text-indent: 50px;
+    margin: auto 3rem;
+}
+
+.btn-incontent{
+    display: none;
+}
+
+.openMenu{
+    display: none;
+}
+
+.btn-fnTasklist{
+    display: none;
+}
+
+.nav-list{
+    display: none;
+}
+
+@media (max-width: 1350px) {
+    .head-task{
+        width: 50%;
+    }
+}
+
+@media (max-width: 1130px) {
+    .head-task{
+        width: 40%;
+    }
+}
+
+@media (max-width: 1023px) {
+    .btn-content{
+        display: none;
+    }
+
+    .btn-tasklist{
+        display: none;
+    }
+
+    .sidebar{
+        display: none;
+    }
+
+    .container{
+        display: block;
+    }
+
+    .tasklist{
+        display: flex;
+    }
+
+    .btn-incontent{
+        display: block;
+    }
+    
+    .openMenu{
+        display: block;
+    }
+
+    .openMenu i{
+        font-size: 5rem;
+    }
+
+    .nav-list{
+        display: block;
+        position: absolute;
+        width: 100px;
+        height: 300px;
+        margin-top: 36rem;
+        margin-right: 5rem;
+        right: 0;
+        background: #79a7f7;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 30px 20px;
+        transition: all .55s ease;
+    }
+    .nav-list li{
+        list-style: none;
+    }
+    .nav-list a{
+        margin-left: 0;
+        display: block;
+        margin: 0 0 4rem 0;
+    }
+
+    .nav-list a i{
+        font-size: 5rem;
+        color: #fff;
+    }
+
+    .nav-list a:hover{
+        color: #4285f4;
+    }
+
+    .nav-list.open{
+        margin-top: 36rem;
+        margin-right: 5rem;
+        right: 0;
+        opacity: 0.9;
+    }
+
+    .btn-incontent{
+        margin: auto 0 auto 5rem;
+    }
+    .dropbtn {
+        background-color: #4285F4;
+        color: white;
+        width: 170px;
+        height: 60px;
+        font-size: 24px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
+      
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #4285F4;
+    }
+      
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+      
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #95B8F3;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+      
+    .dropdown-content a {
+        color: #fff;
+        padding: 12px 16px;
+        font-size: 20px;
+        text-decoration: none;
+        display: block;
+    }
+      
+    .dropdown a:hover {background-color: #ddd;}
+      
+    .show {display: block;}
+    
+    .showdetail h3{
+        font-size: 14px;
+    }
+    .showdetail p{
+        font-size: 12px;
+    }
+
+    .btn-fnTasklist .btn{
+        background-color: #95B8F3;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        padding: 15px 20px;
+        margin-left: 1rem;
+        cursor: pointer;
+    }
+
+    .btn-fnTasklist .btn i{
+        font-size: 20px;
+        margin-right: 10px;
+    }
+    
+    .btn-fnTasklist .btn:hover{
+        background-color: #4285F4;
+    }
+    
+    .btn-fnTasklist{
+        display: block;
+    }
+    
+}
+
+
+
+
+

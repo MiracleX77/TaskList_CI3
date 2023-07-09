@@ -8,6 +8,7 @@ class Task_model extends CI_Model{
             'title' => $request['title'],
             'description' => $request['description'],
             'user_id' => $request['user_id'],
+            'due_date' => $request['due_date'],
             'status' => 'incomplete'
         );
         $query = $this->db->insert('tbl_task',$data);
@@ -18,10 +19,15 @@ class Task_model extends CI_Model{
             return false;
         }
     }
-    public function get_entriesByUserId($id){
+    public function get_entriesByUserId($id,$status){
 
         $this->db->where('user_id', $id);
-        $this->db->where('status', 'incomplete');
+        if ($status == "all"){
+            $this->db->where('status !=', 'removed');
+        }
+        else{
+            $this->db->where('status', $status);
+        }
         $query = $this->db->get('tbl_task');
         if(!empty($query)){
             return $query->result();
@@ -50,15 +56,26 @@ class Task_model extends CI_Model{
             return false;
         }
     }
-    public function update_entryById($request){
-        date_default_timezone_set('Asia/Bangkok');
-        $data = array(
-            'title' => $request['title'],
-            'description' => $request['description'],
-            'updated_at' => date('Y-m-d H:i:s')
-        );
-        $this->db->where('id', $request['task_id']);
-        $query =$this->db->update('tbl_task', $data);
+    public function update_entryById($updatedData) 
+    {
+        $id = $updatedData['task_id'];
+        $data = [
+            'title' => $updatedData['title'],
+            'description' => $updatedData['description']
+        ];
+
+        $query = $this->db->where('id',$id)->update('tbl_task',$data);
+        
+        if($query){
+            return true;
+        }
+        else{
+            return false;
+        }        
+    }
+    public function done_ById($id){
+        $this->db->where('id', $id);
+        $query =$this->db->update('tbl_task', array('status'=>'complete'));
         if($query){
             return true;
         }
@@ -66,6 +83,20 @@ class Task_model extends CI_Model{
             return false;
         }
     }
+
+    public function get_doneTask_ByUserId($id){
+        $this->db->where('user_id', $id);
+        $this->db->where('status', 'complete');
+        $query = $this->db->get('tbl_task');
+        if(!empty($query)){
+            return $query->result();
+        }
+        else{
+            return false;
+        }
+    }
+
+
 
 
 }
