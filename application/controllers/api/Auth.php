@@ -5,26 +5,21 @@ class Auth extends CI_Controller{
         parent::__construct();
         $this->load->model('user_model');
     }
-    public function viewRegister()
-	{
-		$this->load->view('register_view');
-	}
     public function index(){
     }
-
+    /********************************
+	 * Method: POST
+	 * Param: username,password
+	 * Return: JSON (message)
+	 ********************************/
     public function login(){
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $request = array(
+                'username' => $_POST['username'],
+                'password' =>  $_POST['password'],
+            );
 
-        if($username== null && $password == null){
-
-            $json_data = file_get_contents('php://input');
-            $data = json_decode($json_data, true);
-
-            $username = $data['username'];
-            $password = $data['password'];
-        }
-        $query = $this->user_model->get_entry($username);
+            $query = $this->user_model->get_entry($request['username']);
 
         if(!$query){
             header('HTTP/1.1 404 Not Found');
@@ -33,7 +28,7 @@ class Auth extends CI_Controller{
             );
         }
         else{
-            if($password == $query->password){
+            if($request['password'] == $query->password){
                 $response = array(
                 'message' => 'Login Complete',
             );
@@ -45,42 +40,56 @@ class Auth extends CI_Controller{
             );
             }
         }
-        header('Content-Type:application/json');
-        echo json_encode($response);
-    }
-
-    public function register(){
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-
-        if($username== null && $password == null){
-
-            $json_data = file_get_contents('php://input');
-            $data = json_decode($json_data, true);
-
-            $username = $data['username'];
-            $password = $data['password'];
+            header('Content-Type:application/json');
+            echo json_encode($response);
         }
-
-        $data = array(
-            'username' => $username,
-            'password' => $password,
-        );
-        
-        $status = $this->user_model->insert_entry($data);
-        
-        if($status){
-            $response = array(
-                'message' => 'register complete',
-            );
-        }else{
+        else{
             header('HTTP/1.1 400 Bad Request');
             $response = array(
-                'message' => 'ERR: register',
+                'message' => 'ERR: Method not correct',
             );
+            header('Content-Type:application/json');
+            echo json_encode($response);
         }
-
-        header('Content-Type:application/json');
-        echo json_encode($response);
     }
+    
+    /********************************
+	 * Method: POST
+	 * Param: username,password
+	 * Return: JSON (message)
+	 ********************************/
+    public function register(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $request = array(
+                'username' => $_POST['username'],
+                'password' =>  $_POST['password'],
+            );
+
+            $query = $this->user_model->insert_entry($request);
+
+            if(!$query){
+                header('HTTP/1.1 400 Bad Request');
+                $response = array(
+                    'message' => 'ERR: register',
+                );
+            }
+            else{
+                $response = array(
+                    'message' => 'SUS: register complete'
+                );
+            }
+            header('Content-Type:application/json');
+            echo json_encode($response);
+        }
+        else{
+            header('HTTP/1.1 400 Bad Request');
+            $response = array(
+                'message' => 'ERR: Method not correct',
+            );
+            header('Content-Type:application/json');
+            echo json_encode($response);
+        }
+        
+    }
+
 }
